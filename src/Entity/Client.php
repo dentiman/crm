@@ -37,6 +37,16 @@ class Client
      */
     private $phoneNumber;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="clients")
+     */
+    private $user;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +96,18 @@ class Client
     public function setPhoneNumber(?string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
